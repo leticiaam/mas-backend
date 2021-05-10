@@ -5,11 +5,11 @@ class CourseUnitController {
     async create(request: Request, response:Response){
         const userData = request.body
 
-        const createUser = new CreateCourseUnitService()
+        const createCourseUnit = new CreateCourseUnitService()
 
-        const user = await createUser.execute(userData);
+        const courseUnit = await createCourseUnit.execute(userData);
 
-        return response.json(user);
+        return response.json(courseUnit);
     }
 }
 

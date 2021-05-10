@@ -10,7 +10,7 @@ interface UserData  {
 
 class CreateUserService {
 
-    public async execute( {name, email, password}: UserData){
+        public async execute( {name, email, password}: UserData): Promise<User | {}>{
 
         const userRepository = getRepository(User);
 
@@ -22,11 +22,11 @@ class CreateUserService {
 
         const hashedPassword = await hash(password, 8);
 
-        const user = {
+        const user = userRepository.create( {
             name,
             email,
             password: hashedPassword
-        }
+        });
 
         await userRepository.save(user);
 
