@@ -9,5 +9,6 @@
     "entities":["./src/model/*.ts"],
     "cli":{
         "migrationsDir": "./src/database/migrations"
-    }
+    },
+    "synchronize": "true"
 }

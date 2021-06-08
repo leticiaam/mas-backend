@@ -1,14 +1,35 @@
-interface UserId{
-    id?: string;
+import { getRepository } from "typeorm";
+import { User } from "../model/User"
 
+interface UserData {
+    id?:string
 }
 
 class GetUserService {
+    public async execute({id}:UserData): Promise<User | {}> {
 
-    public async execute({id}: UserId){
+        if(!id){
+            return {
+                error:'id not found in the parameter'
+            }
+        }
+
+        const usersRepository = getRepository(User);
         
-    }
+        const user = await usersRepository.findOne({id});
 
+        if(!user){
+            return {
+                error:"user not found"
+            }
+        }
+
+        return {
+            id:user.id,
+            name:user.name,
+            email:user.email
+        };
+    }
 }
 
 export {GetUserService}
